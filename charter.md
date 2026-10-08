@@ -8,14 +8,16 @@ This charter is what we promise and how we work. Every sentence in it should be 
 
 - Everything we make is open source.
 - Nothing is sold, and nothing is behind a paywall.
-- Nothing locks you in. You can take your data and leave, or run everything yourself.
+- Nothing locks you in: our software is yours to run yourself, and we are building the tools to take your data with you (see below).
 
 ### Your data
 
-- We collect no data of any kind: no tracking, no telemetry, no analytics, no profiling.
-- You can export your data at any time, in open formats.
-- You can move to your own node at any time.
-- When you delete your account, your data is deleted.
+- **We never store your IP address, and we keep no logs about you.** Our services keep only what they need to work and stay secure — never for tracking, analytics or profiling. Exactly what we keep, and for how long, is listed on our [privacy status page](https://tnhc.dev/privacy).
+- **An automated check proves this every day.** It sends a marked test address through every public service and searches everything we run for it. Its latest result is public on the [privacy status page](https://tnhc.dev/privacy).
+- **You will be able to export all your data in open formats.** Today: Chat only.
+- **Deleting your account will delete your data, everywhere.** Today: partial — see the [privacy status page](https://tnhc.dev/privacy).
+- **You will be able to move your account to your own node.** Today: you can run your own node; moving an existing account is not built yet.
+- **What others can see:** our web traffic passes through Cloudflare, which can see it, and mail passes through Resend and Cloudflare Email Routing. We say so plainly and are working to remove them.
 
 We are building the Phantom Protocol to enforce this with cryptography, so that even TNHC's own infrastructure cannot see what you do. It is not finished. The [Phantom status page](https://tnhc.dev/phantom) shows exactly what works today and what does not, and we never claim more than it shows.
 
