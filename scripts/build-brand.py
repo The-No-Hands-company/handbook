@@ -13,7 +13,7 @@ master is the only way to change the logo.
 SVG output is plain text built in a fixed order, so it is byte-for-byte
 reproducible. PNG/ICO go through ImageMagick and are checked by size only.
 """
-import argparse, pathlib, subprocess, sys, xml.etree.ElementTree as ET
+import argparse, pathlib, subprocess, sys, tempfile, xml.etree.ElementTree as ET
 
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
@@ -37,6 +37,8 @@ PNGS = {f"icons/app-icon-{s}.png": s for s in (16, 32, 48, 180, 192, 512)}
 PNGS.update({f"icons/android/launcher-{s}.png": s for s in (48, 72, 96, 144, 192)})
 PNGS.update({"icons/android/play-store-512.png": 512, "icons/github-avatar-500.png": 500})
 ICO = "icons/favicon.ico"           # 16, 32 and 48 inside
+# Platforms that apply their own mask get a full-bleed square, not our rounded tile.
+SQUARE = {"icons/android/play-store-512.png", "icons/github-avatar-500.png"}
 
 
 def num(v):
@@ -98,10 +100,10 @@ def lockup(L, colour):
     return svg(right, H, sign(L) + "\n" + text)
 
 
-def app_icon(L, side=256, inner=192):
+def app_icon(L, side=256, inner=192, radius=0.22):
     k = inner / W
     tx, ty = (side - inner) / 2, (side - H * k) / 2
-    body = (f'<rect width="{side}" height="{side}" rx="{num(side * 0.22)}" fill="{VOID}"/>\n'
+    body = (f'<rect width="{side}" height="{side}" rx="{num(side * radius)}" fill="{VOID}"/>\n'
             f'<g transform="translate({num(tx)} {num(ty)}) scale({num(k)})">\n{sign(L)}\n</g>')
     return svg(side, side, body)
 
@@ -127,10 +129,12 @@ def magick(*args):
 
 def build_rasters():
     icon = BRAND / "logo" / "tnhc-app-icon.svg"
+    square = pathlib.Path(tempfile.mkdtemp()) / "tnhc-app-icon-square.svg"
+    square.write_text(app_icon(layers(), radius=0), encoding="utf-8")
     for rel, size in PNGS.items():
         p = BRAND / rel
         p.parent.mkdir(parents=True, exist_ok=True)
-        magick("-background", "none", "-density", 600, icon, "-resize", f"{size}x{size}", "-strip", p)
+        magick("-background", "none", "-density", 600, (square if rel in SQUARE else icon), "-resize", f"{size}x{size}", "-strip", p)
     magick("-background", "none", "-density", 600, icon, "-define", "icon:auto-resize=48,32,16", BRAND / ICO)
 
 

@@ -2,7 +2,7 @@
 # Fails when the published brand drifts from its source:
 #  - a generated logo SVG differs from what the master produces,
 #  - an icon is missing or the wrong size,
-#  - a colour pair in brand.md falls below its contrast level,
+#  - a colour pair brand.md promises falls below its contrast level (pairs listed below; keep them in step with brand.md),
 #  - brand.md lacks a section, or the README does not list it.
 set -euo pipefail
 ROOT="${ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
@@ -19,14 +19,17 @@ for f in "$tmp"/logo/*.svg; do
 done
 
 # 2. every icon exists at its size
+icons=$(PYTHONDONTWRITEBYTECODE=1 python3 -c '
+import importlib.util, sys
+spec = importlib.util.spec_from_file_location("b", "scripts/build-brand.py"); b = importlib.util.module_from_spec(spec); spec.loader.exec_module(b)
+for rel, s in b.PNGS.items(): print(rel, s)') || bad "could not read the icon list from build-brand.py"
+[ -n "$icons" ] || bad "build-brand.py lists no icons"
 while read -r rel size; do
+  [ -n "$rel" ] || continue
   [ -f "brand/$rel" ] || { bad "brand/$rel missing"; continue; }
   got=$(magick identify -format '%wx%h' "brand/$rel" 2>/dev/null || echo none)
   [ "$got" = "${size}x${size}" ] || bad "brand/$rel is $got, expected ${size}x${size}"
-done < <(python3 -c '
-import importlib.util, sys
-spec = importlib.util.spec_from_file_location("b", "scripts/build-brand.py"); b = importlib.util.module_from_spec(spec); spec.loader.exec_module(b)
-for rel, s in b.PNGS.items(): print(rel, s)')
+done <<< "$icons"
 if [ -f brand/icons/favicon.ico ]; then
   sizes=$(magick identify -format '%w ' brand/icons/favicon.ico 2>/dev/null | tr ' ' '\n' | sort -n | xargs)
   [ "$sizes" = "16 32 48" ] || bad "brand/icons/favicon.ico holds sizes '$sizes', expected '16 32 48'"

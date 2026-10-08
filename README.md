@@ -8,4 +8,4 @@ How The No Hands Company works, in public. Chapters:
 
 Also here: our [Code of Conduct](CODE_OF_CONDUCT.md) and our [finances](finances.md).
 
-Everything in this repository is licensed [CC BY 4.0](LICENSE).
+Everything in this repository is licensed [CC BY 4.0](LICENSE), except the Figtree font file in `brand/fonts/`, which is under the SIL Open Font License ([`brand/fonts/OFL.txt`](brand/fonts/OFL.txt)).

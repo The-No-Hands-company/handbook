@@ -1,6 +1,6 @@
 # Brand files
 
-Generated from `logo/tnhc-sign.svg` by `scripts/build-brand.py` — edit the master and rebuild; never edit a generated file. `scripts/check-brand.sh` fails if one drifts.
+Generated from `logo/tnhc-sign.svg` by `scripts/build-brand.py` — edit the master and rebuild; never edit a generated file. `scripts/check-brand.sh` fails if a generated SVG differs from the master, or if an icon is missing or the wrong size.
 
 | Need | File |
 |---|---|
