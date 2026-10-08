@@ -13,11 +13,11 @@ This charter is what we promise and how we work. Every sentence in it should be 
 ### Your data
 
 - **We never store your IP address, and we keep no logs about you.** Our services keep only what they need to work and stay secure — never for tracking, analytics or profiling. Exactly what we keep, and for how long, is listed on our [privacy status page](https://tnhc.dev/privacy).
-- **An automated check proves this every day.** It sends a marked test address through every public service and searches everything we run for it. Its latest result is public on the [privacy status page](https://tnhc.dev/privacy).
-- **You will be able to export all your data in open formats.** Today: Chat only.
+- **An automated check tests this every day.** It sends a marked test address to our main public services, then searches our logs, containers, databases and sign-in files for it. Its latest result is public on the [privacy status page](https://tnhc.dev/privacy).
+- **You will be able to export all your data in open formats.** Today: Chat only, and only your profile, servers and last 1,000 messages.
 - **Deleting your account will delete your data, everywhere.** Today: partial — see the [privacy status page](https://tnhc.dev/privacy).
 - **You will be able to move your account to your own node.** Today: you can run your own node; moving an existing account is not built yet.
-- **What others can see:** our web traffic passes through Cloudflare, which can see it, and mail passes through Resend and Cloudflare Email Routing. We say so plainly and are working to remove them.
+- **What others can see:** our web traffic passes through Cloudflare, which can see it, and keeps our waitlist, and mail passes through Resend and Cloudflare Email Routing. We say so plainly and are working to remove them.
 
 We are building the Phantom Protocol to enforce this with cryptography, so that even TNHC's own infrastructure cannot see what you do. It is not finished. The [Phantom status page](https://tnhc.dev/phantom) shows exactly what works today and what does not, and we never claim more than it shows.
 
