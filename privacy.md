@@ -15,7 +15,8 @@ These promises come from our [Charter](https://tnhc.dev/charter).
 | You can export your data in open formats | Partial — Chat only: your profile, servers and last 1,000 messages (not attachments) | Chat's data export. |
 | Deleting your account deletes your data | Partial — an administrator can delete your sign-in account, but that does not delete what you stored in our services; Chat's own account deletion blanks your profile after 30 days but keeps your messages | — |
 | You can move your account to your own node | Not done — you can already run your own node | — |
-| Your stored data is encrypted with a key only you hold | Not done | Planned as part 3 of our privacy work. |
+| Your stored data is encrypted with a key only you hold | Done for new Phantom messages — private keys are generated in your browser and never leave it. Existing stored data (mail, files) is not yet encrypted at rest. | Phantom key manager in Settings > Security; our sign-in service is open source. |
+| We have not received any government order to disclose your data | See warrant canary below — updated at least every 90 days | [status.tnhc.dev/canary.json](https://status.tnhc.dev/canary.json) |
 
 ## What we keep, and why
 
@@ -35,3 +36,15 @@ Nothing is kept for tracking, analytics or profiling.
 - **Cloudflare Email Routing.** Mail sent to you from outside Nexus passes through Cloudflare first.
 
 We state these as known limits. Our plan to remove them is onion access first, then the [Phantom Protocol](https://tnhc.dev/phantom).
+
+## Warrant canary
+
+As of **2026-10-16**, TNHC states:
+
+1. We have not received any government order, court order, subpoena, or other compulsory legal process requiring disclosure of user data.
+2. We have not received any request to introduce a backdoor or surveillance capability into any TNHC system.
+3. We have not been prohibited from disclosing any request for user data.
+
+This statement is updated at least every 90 days. If it has not been updated, assume something prevents free updating and treat the canary as lapsed. The machine-readable version is at [status.tnhc.dev/canary.json](https://status.tnhc.dev/canary.json). The git history of this file is the proof of currency.
+
+TNHC is operated in Sweden. Swedish court orders are generally public; there are no NSL-equivalent instruments under Swedish law.
